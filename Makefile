@@ -13,7 +13,7 @@ SRC = 	pipex.c \
 		ft_strtrim.c \
 		ft_strlcpy.c \
 
-# CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 $(NAME): $(INCLUDE) $(SRC:.c=.o)

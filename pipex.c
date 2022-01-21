@@ -6,7 +6,7 @@
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 22:36:30 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/01/20 17:58:33 by zait-sli         ###   ########.fr       */
+/*   Updated: 2022/01/21 17:59:48 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	midle_cmd(char *arg, int p[2], char **envp)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_end(char *arg, int fd[2], int p[2], char **envp)
+void	ft_end(char *arg, int fd[2], char **envp)
 {
 	char	*cammand_path;
 	char	**cmd;
@@ -108,7 +108,7 @@ int	main(int argc, char **argv, char **envp)
 			if (a == argc - 3)
 				beginning(argv[2], fd, p, envp);
 			else if (a == 1)
-				ft_end(argv[argc -2], fd, p, envp);
+				ft_end(argv[argc -2], fd, envp);
 			else
 				midle_cmd(argv[b], p, envp);
 		}

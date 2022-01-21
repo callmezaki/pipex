@@ -6,7 +6,7 @@
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 22:54:47 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/01/20 17:56:18 by zait-sli         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:01:00 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	treat_heredoc(char **argv, char **envp)
 	int		id;
 
 	a = 2;
+	fd = 0;
 	pipe(p);
 	pipe(p1);
 	take_input(argv[2], p);
