@@ -6,7 +6,7 @@
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:49:19 by zait-sli          #+#    #+#             */
-/*   Updated: 2021/12/23 20:16:18 by zait-sli         ###   ########.fr       */
+/*   Updated: 2022/01/19 19:59:33 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	a = 0;
 	while (s1[a] && s2[a] && s1[a] == s2[a] && a < n - 1)
+		a++;
+	return (((unsigned char *)s1)[a] - ((unsigned char *)s2)[a]);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	a;
+
+	a = 0;
+	while (s1[a] && s2[a] && s1[a] == s2[a])
 		a++;
 	return (((unsigned char *)s1)[a] - ((unsigned char *)s2)[a]);
 }

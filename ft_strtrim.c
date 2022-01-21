@@ -1,52 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_beta.c                                  :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 11:24:11 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/01/20 00:20:47 by zait-sli         ###   ########.fr       */
+/*   Created: 2021/11/05 12:01:45 by zait-sli          #+#    #+#             */
+/*   Updated: 2022/01/19 04:28:00 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include<stdlib.h>
 #include "pipex.h"
 
-char	*ft_strjoin_beta(char *s1, char *s2)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	char	*s;
-	int		a;
+	size_t		start;
+	size_t		end;
+	char		*s;
 
-	if (!s1 || !s2)
-		return (NULL);
-	a = ft_strlen(s1);
-	s = (char *)malloc(a + ft_strlen(s2) + 2);
-	if (s == NULL)
-		return (NULL);
-	s[a++] = '/';
-	i = 0;
-	s = ft_copy(s, s1);
-	i = 0;
-	while (s2[i])
+	s = 0;
+	if (s1 != 0 && set != 0)
 	{
-		s[a] = s2[i];
-		a++;
-		i++;
-	}
-	s[a] = '\0';
-	return (s);
-}
-
-char	*ft_copy(char *s, char *s1)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		s[i] = s1[i];
-		i++;
+		start = 0;
+		end = ft_strlen(s1);
+		while (s1[start] && ft_strchr(set, s1[start]))
+			start++;
+		while (s1[end - 1] && ft_strchr(set, s1[end - 1]) && end > start)
+			end--;
+		s = (char *)malloc(sizeof(char) * (end - start + 1));
+		if (s)
+			ft_strlcpy(s, &s1[start], end - start + 1);
 	}
 	return (s);
 }

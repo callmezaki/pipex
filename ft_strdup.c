@@ -1,52 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_beta.c                                  :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 11:24:11 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/01/20 00:20:47 by zait-sli         ###   ########.fr       */
+/*   Created: 2021/11/05 11:59:37 by zait-sli          #+#    #+#             */
+/*   Updated: 2022/01/19 19:58:18 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin_beta(char *s1, char *s2)
+char	*ft_strdup(const char *src)
 {
 	int		i;
-	char	*s;
-	int		a;
+	char	*dup;
 
-	if (!s1 || !s2)
-		return (NULL);
-	a = ft_strlen(s1);
-	s = (char *)malloc(a + ft_strlen(s2) + 2);
-	if (s == NULL)
-		return (NULL);
-	s[a++] = '/';
-	i = 0;
-	s = ft_copy(s, s1);
-	i = 0;
-	while (s2[i])
+	i = ft_strlen(src);
+	dup = (char *)malloc(i + 1);
+	if (dup == NULL)
 	{
-		s[a] = s2[i];
-		a++;
+		return (0);
+	}
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dup[i] = src[i];
 		i++;
 	}
-	s[a] = '\0';
-	return (s);
-}
-
-char	*ft_copy(char *s, char *s1)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		s[i] = s1[i];
-		i++;
-	}
-	return (s);
+	dup[i] = '\0';
+	return (dup);
 }
