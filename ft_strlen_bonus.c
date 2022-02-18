@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 11:59:37 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/02/17 21:14:02 by zait-sli         ###   ########.fr       */
+/*   Created: 2021/11/01 10:11:45 by zait-sli          #+#    #+#             */
+/*   Updated: 2022/02/16 10:30:50 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-char	*ft_strdup(const char *src)
+size_t	ft_strlen(const char *str)
 {
-	int		i;
-	char	*dup;
+	size_t	i;
 
-	i = ft_strlen(src);
-	dup = (char *)malloc(i + 1);
-	if (dup == NULL)
-	{
-		return (0);
-	}
 	i = 0;
-	while (src[i] != '\0')
+	while (str[i])
 	{
-		dup[i] = src[i];
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (i);
 }

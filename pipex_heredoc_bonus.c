@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_heredoc.c                                    :+:      :+:    :+:   */
+/*   pipex_heredoc_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 22:54:47 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/01/21 18:01:00 by zait-sli         ###   ########.fr       */
+/*   Updated: 2022/02/18 02:49:36 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex.h"
+#include"pipex_bonus.h"
 
-void	first_cmd(char *arg, char **envp, int *p, int *p1)
+void	first_cmd(char *arg, char **envp, t_data vars)
 {
 	char	*cammand_path;
 	char	**cmd;
@@ -26,20 +26,20 @@ void	first_cmd(char *arg, char **envp, int *p, int *p1)
 		perror("ERROR ");
 		exit (EXIT_FAILURE);
 	}
-	dup2(p[0], STDIN_FILENO);
-	dup2(p1[1], STDOUT_FILENO);
+	dup2(vars.p[0], STDIN_FILENO);
+	dup2(vars.p1[1], STDOUT_FILENO);
 	execve(cammand_path, cmd, envp);
-	close(p[0]);
-	close(p1[1]);
+	close(vars.p[0]);
+	close(vars.p1[1]);
 }
 
-void	second_cmd(char **argv, char **envp, int *p1, int fd)
+void	second_cmd(char **argv, char **envp, t_data vars)
 {
 	char	*cammand_path;
 	char	**cmd;
 	char	**paths;
 
-	fd = open(argv[5], O_CREAT | O_RDWR, 0666);
+	vars.fd = open(argv[5], O_CREAT | O_RDWR, 0666);
 	paths = get_paths(envp);
 	cmd = ft_split(argv[4], ' ');
 	cammand_path = get_cammand_path(paths, cmd[0]);
@@ -48,11 +48,11 @@ void	second_cmd(char **argv, char **envp, int *p1, int fd)
 		write(1, "command not found", 18);
 		exit (EXIT_FAILURE);
 	}
-	dup2(p1[0], STDIN_FILENO);
-	dup2(fd, STDOUT_FILENO);
+	dup2(vars.p1[0], STDIN_FILENO);
+	dup2(vars.fd, STDOUT_FILENO);
 	if (execve(cammand_path, cmd, envp) == -1)
 		strerror(errno);
-	close(p1[0]);
+	close(vars.p1[0]);
 }
 
 void	take_input(char *arg, int *p)
@@ -78,30 +78,26 @@ void	take_input(char *arg, int *p)
 
 void	treat_heredoc(char **argv, char **envp)
 {
-	int		fd;
-	int		p[2];
-	int		p1[2];
-	int		a;
-	int		id;
+	t_data	vars;
 
-	a = 2;
-	fd = 0;
-	pipe(p);
-	pipe(p1);
-	take_input(argv[2], p);
-	while (a != 0)
+	vars.a = 2;
+	vars.fd = 0;
+	pipe(vars.p);
+	pipe(vars.p1);
+	take_input(argv[2], vars.p);
+	while (vars.a != 0)
 	{
-		id = fork();
-		if (id == 0)
+		vars.id = fork();
+		if (vars.id == 0)
 		{
-			if (a == 2)
-				first_cmd(argv[3], envp, p, p1);
-			else if (a == 1)
-				second_cmd(argv, envp, p1, fd);
+			if (vars.a == 2)
+				first_cmd(argv[3], envp, vars);
+			else if (vars.a == 1)
+				second_cmd(argv, envp, vars);
 			exit(EXIT_FAILURE);
 		}
-		a--;
+		vars.a--;
 	}
-	close(fd);
-	waitpid(id, NULL, -1);
+	close(vars.fd);
+	waitpid(vars.id, NULL, -1);
 }

@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 11:59:37 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/02/17 21:14:02 by zait-sli         ###   ########.fr       */
+/*   Created: 2021/11/03 12:36:48 by zait-sli          #+#    #+#             */
+/*   Updated: 2022/02/16 10:30:47 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-char	*ft_strdup(const char *src)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int		i;
-	char	*dup;
+	size_t	a;
+	size_t	b;
 
-	i = ft_strlen(src);
-	dup = (char *)malloc(i + 1);
-	if (dup == NULL)
+	a = 0;
+	b = 0;
+	while (src [a])
 	{
-		return (0);
+		a++;
 	}
-	i = 0;
-	while (src[i] != '\0')
+	if (dstsize != 0)
 	{
-		dup[i] = src[i];
-		i++;
+		while (src[b] && b < (dstsize - 1))
+		{
+			dst[b] = src[b];
+			b++;
+		}
+		dst[b] = '\0';
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (a);
 }

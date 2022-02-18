@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zait-sli <zait-sli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 19:56:59 by zait-sli          #+#    #+#             */
-/*   Updated: 2022/02/18 02:48:32 by zait-sli         ###   ########.fr       */
+/*   Updated: 2022/02/18 02:48:40 by zait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 # include <stdio.h>
 # include <stdlib.h>
 # include<unistd.h>
@@ -20,14 +20,23 @@
 # include <errno.h>
 
 typedef struct s_vars
-{	
+{
 	int		p[2];
 	int		fd[2];
 	int		id;
+	char	**paths;
 	int		a;
 	int		b;
-
 }	t_vars;
+
+typedef struct s_data
+{	
+	int		fd;
+	int		p[2];
+	int		p1[2];
+	int		a;
+	int		id;
+}	t_data;
 
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin_beta(char *s1, char *s2);
@@ -38,6 +47,7 @@ char	*ft_strdup(const char *src);
 char	**get_paths(char **envp);
 char	*get_cammand_path(char **paths, char *cmd);
 void	beginning(char *arg, int fd[2], int p[2], char **envp);
+void	midle_cmd(char *arg, int p[2], char **envp);
 void	ft_end(char *arg, int fd[2], char **envp);
 void	ft_free_double(char **p);
 char	*ft_strjoin(char *s1, char *s2);
